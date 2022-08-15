@@ -230,6 +230,7 @@ export default {
     },
   },
   mounted() {
+    // Calling of bootstrap tooltips
     const tooltips = document.querySelectorAll('.tt')
     if (tooltips) {
       tooltips.forEach((t) => {

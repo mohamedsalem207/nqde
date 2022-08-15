@@ -78,27 +78,43 @@ export default {
     }
   },
   methods: {
+    // function that deselect all clients
     deselectAll() {
+      // Get all check inputs in the table body
       if (this.$refs.selectClient) {
+        // Set checked attribute to false
         if (this.$refs.selectClient.length > 0)
           this.$refs.selectClient.forEach((el) => (el.checked = false))
       }
+      // Set allSelected data property to false
       this.allSelected = false
+      // Set all property data to false
       this.all = false
+      // Set clientsNumber data property to 0
       this.clientsNumber = 0
     },
+    // Function that select all clients
     selectAll() {
+      // Set all data property to true
       this.all = true
+      // Set clientsNumber data property to be the number of all clients
       this.clientsNumber = this.clients.length
+      // Set allSelected data property to true
       this.allSelected = true
     },
     selectClient(e) {
+      // Check that the client is selected
       if (e.target.checked) {
+        // Set allSelected data property to true
         this.allSelected = true
+        // Increase the value of clientsNumber data property
         this.clientsNumber++
       } else {
+        // Check if the clientsNumber data property if equal 1
         if (this.clientsNumber == 1) {
+          // Set allSelected data property to false
           this.allSelected = false
+          // Set clientsNumber data property to 0
           this.clientsNumber = 0
         } else this.clientsNumber--
       }
