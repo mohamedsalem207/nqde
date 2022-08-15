@@ -108,6 +108,7 @@ table {
   thead {
     th {
       font-size: 20px;
+      border: none !important;
     }
   }
   tbody {
@@ -120,7 +121,15 @@ table {
     }
   }
   tr {
+    border-left: 0 !important;
+    border-right: 0 !important;
     border-color: rgb(112, 112, 112, 0.5) !important;
+    &:last-of-type {
+      border: none !important;
+      td, th {
+        border: none !important;
+      }
+    }
   }
   input {
     cursor: pointer;
