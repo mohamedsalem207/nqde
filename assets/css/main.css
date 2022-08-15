@@ -1,0 +1,16 @@
+* {
+  font-family: 'Tajawal', sans-serif;
+}
+
+body {
+  background-color: #e5e5e5;
+}
+
+body .clients,
+body .client,
+body .requests,
+body .request-page {
+  -webkit-padding-start: 315px;
+          padding-inline-start: 315px;
+}
+/*# sourceMappingURL=main.css.map */
