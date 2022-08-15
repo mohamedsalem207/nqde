@@ -126,7 +126,8 @@ table {
     border-color: rgb(112, 112, 112, 0.5) !important;
     &:last-of-type {
       border: none !important;
-      td, th {
+      td,
+      th {
         border: none !important;
       }
     }
