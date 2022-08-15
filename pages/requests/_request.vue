@@ -214,12 +214,15 @@ export default {
     }
   },
   methods: {
+    // Function that add the new classification
     addClassification(item) {
+      // Get the classification that match the selected item
       let matchedItem = this.addedRequests.find(
         (request) => request.name == item.title
       )
       if (matchedItem) return
       else {
+        // Make a new object variable abd push it to addRequests data property
         let newItem = {
           name: item.title,
           quantity: 1,

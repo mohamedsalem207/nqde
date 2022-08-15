@@ -78,7 +78,7 @@ export default {
     }
   },
   methods: {
-    // function that deselect all clients
+    // Function that deselect all clients
     deselectAll() {
       // Get all check inputs in the table body
       if (this.$refs.selectClient) {
