@@ -46,6 +46,7 @@
             class="form-check-input"
             type="checkbox"
             :checked="all"
+            ref="selectClient"
           />
         </th>
         <td>{{ client.name }}</td>
@@ -78,6 +79,10 @@ export default {
   },
   methods: {
     deselectAll() {
+      if (this.$refs.selectClient) {
+        if (this.$refs.selectClient.length > 0)
+          this.$refs.selectClient.forEach((el) => (el.checked = false))
+      }
       this.allSelected = false
       this.all = false
       this.clientsNumber = 0
