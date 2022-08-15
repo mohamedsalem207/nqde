@@ -28,7 +28,14 @@
           class="request d-flex align-items-center justify-content-between"
         >
           <!-- Request name -->
-          <h6 class="request-name mb-0 text-truncate" :title="request.name">
+          <h6
+            class="tt request-name mb-0 text-truncate"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            :data-bs-title="request.name"
+          >
             {{ request.name }}
           </h6>
 
@@ -221,6 +228,14 @@ export default {
         this.addedRequests.push(newItem)
       }
     },
+  },
+  mounted() {
+    const tooltips = document.querySelectorAll('.tt')
+    if (tooltips) {
+      tooltips.forEach((t) => {
+        new bootstrap.Tooltip(t)
+      })
+    }
   },
 }
 </script>
