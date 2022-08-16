@@ -150,6 +150,15 @@ export default {
   .popup-content {
     max-height: 100%;
     width: 35%;
+    @media only screen and (max-width: 1200px) {
+      width: 45% !important;
+    }
+    @media only screen and (max-width: 992px) {
+      width: 70% !important;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 100% !important;
+    }
     background-color: #fafafa;
     form {
       .required {

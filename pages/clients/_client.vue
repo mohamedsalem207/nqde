@@ -2,9 +2,11 @@
   <!-- Start of the client page -->
   <div class="client">
     <!-- Start of the header -->
-    <header class="bg-white d-flex justify-content-between pt-2 pb-4 px-2 mb-5">
+    <header
+      class="bg-white d-flex flex-column flex-md-row justify-content-between pt-2 pb-4 px-2 mb-5"
+    >
       <!-- Content -->
-      <div class="content">
+      <div class="content mb-3 mb-md-0">
         <!-- Calling of the EditClientData component -->
         <PopupsEditClientData
           v-if="editClientData"
@@ -44,7 +46,7 @@
     <!-- End of the header -->
 
     <!-- Content -->
-    <div class="content px-5">
+    <div class="content px-lg-5 px-2">
       <!-- Client stats -->
       <div class="client-stats">
         <div class="row px-0 mx-0 flex-wrap">
@@ -148,15 +150,15 @@
       <!-- End of the client stats -->
 
       <!-- Client info -->
-      <div class="client-info py-3 px-4 bg-white mx-3 mb-4">
+      <div class="client-info py-3 px-2 px-md-4 bg-white mx-3 mb-4">
         <div class="row justify-content-between px-0 mx-0 mb-4">
-          <div class="col-lg-6 ps-5">
+          <div class="col-lg-6 ps-5 mb-4 mb-md-0">
             <h4 class="fw-bold mb-3">الاسم</h4>
 
             <h5 class="mb-0 pb-2 border-bottom border-2">علي الأسمري</h5>
           </div>
 
-          <div class="col-lg-6 ps-5">
+          <div class="col-lg-6 ps-5 mb-4 mb-md-0">
             <h4 class="fw-bold mb-3">البريد الإلكتروني</h4>
 
             <h5 class="mb-0 pb-2 border-bottom border-2">
@@ -166,13 +168,13 @@
         </div>
 
         <div class="row justify-content-between px-0 mx-0 mb-4">
-          <div class="col-lg-6 ps-5">
+          <div class="col-lg-6 ps-5 mb-4 mb-md-0">
             <h4 class="fw-bold mb-3">الهاتف</h4>
 
             <h5 class="mb-0 pb-2 border-bottom border-2">01015591833</h5>
           </div>
 
-          <div class="col-lg-6 ps-5">
+          <div class="col-lg-6 ps-5 mb-4 mb-md-0">
             <h4 class="fw-bold mb-3">برنامج الولاء</h4>
 
             <h5 class="mb-0 pb-2 border-bottom border-2">غير مفعل</h5>
@@ -180,13 +182,13 @@
         </div>
 
         <div class="row justify-content-between px-0 mx-0 mb-4">
-          <div class="col-lg-6 ps-5">
+          <div class="col-lg-6 ps-5 mb-4 mb-md-0">
             <h4 class="fw-bold mb-3 me-2">الحسابات الآجله</h4>
 
             <h5 class="mb-0 pb-2 border-bottom border-2">غير مفعل</h5>
           </div>
 
-          <div class="col-lg-6 ps-5">
+          <div class="col-lg-6 ps-5 mb-4 mb-md-0">
             <h4 class="fw-bold mb-3 me-2">القائمة السوداء</h4>
 
             <h5 class="mb-0 pb-2 border-bottom border-2">لا</h5>
@@ -198,16 +200,20 @@
       <!-- Tags -->
       <div class="tags mx-3 mb-5">
         <!-- Start of the header -->
-        <header class="mb-3 d-flex justify-content-between">
-          <h2 class="me-3 mb-0 fw-bold">الوسوم</h2>
+        <header
+          class="mb-3 d-flex flex-column flex-md-row justify-content-between"
+        >
+          <h2 class="me-3 mb-3 mb-md-0 fw-bold">الوسوم</h2>
 
-          <button class="btn border-0 text-white px-4">إضافة وسوم</button>
+          <button class="btn border-0 text-white px-2 px-md-4">
+            إضافة وسوم
+          </button>
         </header>
         <!-- End of the header -->
 
         <!-- Tags content -->
-        <div class="tags-content bg-white py-3 px-4">
-          <h5 class="empty text-center">
+        <div class="tags-content bg-white py-3 px-2 px-md-4">
+          <h5 class="empty text-end text-md-center">
             يمكنك إضافة وسم لهذا العميل لغرض التصفية و تعيين العروض الترويجية.
           </h5>
 
@@ -223,8 +229,10 @@
       <!-- Title -->
       <div class="tags mx-3 mb-3">
         <!-- Start of the header -->
-        <header class="mb-3 d-flex justify-content-between">
-          <h2 class="me-3 mb-0 fw-bold">العناوين</h2>
+        <header
+          class="mb-3 d-flex flex-column flex-md-row justify-content-between"
+        >
+          <h2 class="me-3 mb-3 mb-md-0 fw-bold">العناوين</h2>
 
           <button class="btn border-0 text-white px-4">إضافة عنوان</button>
         </header>
@@ -232,7 +240,9 @@
 
         <!-- Tags content -->
         <div class="tags-content bg-white py-3 px-4">
-          <SharedClientTable :table="titleTable" />
+          <div class="table-responsive">
+            <SharedClientTable :table="titleTable" />
+          </div>
         </div>
         <!-- End of the tags content -->
       </div>
@@ -241,8 +251,10 @@
       <!-- Requests -->
       <div class="tags mx-3 mb-5">
         <!-- Start of the header -->
-        <header class="mb-3 d-flex justify-content-between">
-          <h2 class="me-3 mb-0 fw-bold">الطلبات</h2>
+        <header
+          class="mb-3 d-flex flex-column flex-md-row justify-content-between"
+        >
+          <h2 class="me-3 mb-3 mb-md-0 fw-bold">الطلبات</h2>
 
           <button class="btn border-0 text-white px-4">إضافة طلب</button>
         </header>
@@ -250,7 +262,9 @@
 
         <!-- Tags content -->
         <div class="tags-content bg-white py-3 px-4">
-          <SharedClientTable :table="requestsTable" />
+          <div class="table-responsive">
+            <SharedClientTable :table="requestsTable" />
+          </div>
         </div>
         <!-- End of the tags content -->
       </div>
@@ -259,8 +273,10 @@
       <!-- Transaction -->
       <div class="tags mx-3 mb-5">
         <!-- Start of the header -->
-        <header class="mb-3 d-flex justify-content-between">
-          <h2 class="me-3 mb-0 fw-bold">معاملات الحساب الآجل</h2>
+        <header
+          class="mb-3 d-flex flex-column flex-md-row justify-content-between"
+        >
+          <h2 class="me-3 mb-3 mb-md-0 fw-bold">معاملات الحساب الآجل</h2>
 
           <button class="btn border-0 text-white px-4">إضافة دفعة</button>
         </header>
@@ -268,7 +284,9 @@
 
         <!-- Tags content -->
         <div class="tags-content bg-white py-3 px-4">
-          <SharedClientTable :table="transactionTable" />
+          <div class="table-responsive">
+            <SharedClientTable :table="transactionTable" />
+          </div>
         </div>
         <!-- End of the tags content -->
       </div>

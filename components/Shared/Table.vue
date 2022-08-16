@@ -11,26 +11,30 @@
           />
         </th>
         <th>
-          <span>محدد</span>
-          <span>{{ clientsNumber }}</span>
-          <select class="btn me-2 px-2 py-1 border border-1 rounded-3 text-end">
-            <option selected disabled value="0">الإجراءات</option>
-            <option value="1">إضافة وسوم</option>
-            <option value="2">مسح وسوم</option>
-            <option value="3">تعديل/مشاهدة</option>
-            <option value="4">حذف</option>
-          </select>
+          <div class="d-flex">
+            <span>محدد</span>
+            <span>{{ clientsNumber }}</span>
+            <select
+              class="btn me-2 px-2 py-1 border border-1 rounded-3 text-end"
+            >
+              <option selected disabled value="0">الإجراءات</option>
+              <option value="1">إضافة وسوم</option>
+              <option value="2">مسح وسوم</option>
+              <option value="3">تعديل/مشاهدة</option>
+              <option value="4">حذف</option>
+            </select>
+          </div>
         </th>
       </tr>
       <tr v-else class="border-bottom">
         <th>
           <input @change="selectAll" class="form-check-input" type="checkbox" />
         </th>
-        <th scope="col">الاسم</th>
-        <th scope="col">الهاتف</th>
-        <th scope="col">البريد الإلكتروني</th>
-        <th scope="col">إجمالي الطلبات</th>
-        <th scope="col">آخر طلب</th>
+        <th scope="col" class="text-truncate">الاسم</th>
+        <th scope="col" class="text-truncate">الهاتف</th>
+        <th scope="col" class="text-truncate">البريد الإلكتروني</th>
+        <th scope="col" class="text-truncate">إجمالي الطلبات</th>
+        <th scope="col" class="text-truncate">آخر طلب</th>
       </tr>
     </thead>
     <tbody>
@@ -49,11 +53,11 @@
             ref="selectClient"
           />
         </th>
-        <td>{{ client.name }}</td>
-        <td>{{ client.phone }}</td>
-        <td>{{ client.email }}</td>
-        <td>{{ client.totalRequests }}</td>
-        <td>{{ client.lastRequest }}</td>
+        <td class="text-truncate">{{ client.name }}</td>
+        <td class="text-truncate">{{ client.phone }}</td>
+        <td class="text-truncate">{{ client.email }}</td>
+        <td class="text-truncate">{{ client.totalRequests }}</td>
+        <td class="text-truncate">{{ client.lastRequest }}</td>
       </tr>
     </tbody>
   </table>

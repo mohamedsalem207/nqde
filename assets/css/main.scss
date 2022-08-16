@@ -9,5 +9,17 @@ body {
   .requests,
   .request-page {
     padding-inline-start: 315px;
+    @media only screen and (max-width: 1400px) {
+      padding-inline-start: 290px !important;
+    }
+    @media only screen and (max-width: 1200px) {
+      padding-inline-start: 75px !important;
+    }
+    @media only screen and (max-width: 992px) {
+      padding-inline-start: 0 !important;
+    }
+  }
+  @media only screen and (max-width: 992px) {
+    padding-bottom: 15% !important;
   }
 }

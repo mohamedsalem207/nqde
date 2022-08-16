@@ -102,10 +102,13 @@
 
         <!-- Btns -->
         <div
-          class="btns w-100 d-flex align-items-center justify-content-between mt-4 py-3 px-3 bg-white"
+          class="btns w-100 d-flex flex-column flex-sm-row align-items-center justify-content-between mt-4 py-3 px-3 bg-white"
         >
           <!-- Reset-btn -->
-          <button class="btn reset-btn text-white border border-2" type="reset">
+          <button
+            class="btn reset-btn text-white border border-2 mb-3 mb-sm-0"
+            type="reset"
+          >
             إعادة الضبط
           </button>
 
@@ -152,18 +155,36 @@ export default {
   z-index: 102;
   .popup-content {
     width: 35%;
+    @media only screen and (max-width: 1200px) {
+      width: 45% !important;
+    }
+    @media only screen and (max-width: 992px) {
+      width: 70% !important;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 100% !important;
+    }
     background-color: #fafafa;
     .btns {
       .reset-btn {
         font-weight: 500;
         background-color: #f20505;
         border-color: #f20505 !important;
+        @media only screen and (max-width: 600px) {
+          width: 100% !important;
+        }
       }
     }
     .submit-btns {
+      @media only screen and (max-width: 600px) {
+        width: 100%;
+      }
       button {
         width: 100px;
         font-weight: 500;
+        @media only screen and (max-width: 600px) {
+          width: 48%;
+        }
       }
       .close-btn {
         border-color: #707070 !important;

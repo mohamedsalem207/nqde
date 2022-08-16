@@ -13,4 +13,40 @@ body .request-page {
   -webkit-padding-start: 315px;
           padding-inline-start: 315px;
 }
+
+@media only screen and (max-width: 1400px) {
+  body .clients,
+  body .client,
+  body .requests,
+  body .request-page {
+    -webkit-padding-start: 290px !important;
+            padding-inline-start: 290px !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  body .clients,
+  body .client,
+  body .requests,
+  body .request-page {
+    -webkit-padding-start: 75px !important;
+            padding-inline-start: 75px !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  body .clients,
+  body .client,
+  body .requests,
+  body .request-page {
+    -webkit-padding-start: 0 !important;
+            padding-inline-start: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  body {
+    padding-bottom: 15% !important;
+  }
+}
 /*# sourceMappingURL=main.css.map */

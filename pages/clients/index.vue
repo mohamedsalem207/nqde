@@ -2,30 +2,32 @@
   <!-- Start of the clients page -->
   <div class="clients">
     <!-- Start of the header -->
-    <header class="bg-white d-flex justify-content-between pt-2 px-2">
+    <header
+      class="bg-white d-flex flex-column flex-md-row justify-content-between pt-2 px-2"
+    >
       <!-- Content -->
-      <div class="content pe-5">
+      <div class="content pe-xl-5 mb-2 mb-md-0">
         <!-- Title -->
         <h4 class="title fw-bold mb-4">العملاء</h4>
 
         <!-- Menu -->
         <ul class="list-unstyled d-flex p-0 m-0">
-          <li class="ms-4">
+          <li class="ms-md-4 ms-3">
             <button class="position-relative active btn border-0 p-0 pb-2">
               الكل
             </button>
           </li>
-          <li class="ms-4">
+          <li class="ms-md-4 ms-3">
             <button class="position-relative btn border-0 p-0 pb-2">
               لديه طلبات
             </button>
           </li>
-          <li class="ms-4">
+          <li class="ms-md-4 ms-3">
             <button class="position-relative btn border-0 p-0 pb-2">
               فى القائمة السوداء
             </button>
           </li>
-          <li class="ms-4">
+          <li class="ms-md-4 ms-3">
             <button class="position-relative btn border-0 p-0 pb-2">
               محذوف
             </button>
@@ -35,7 +37,7 @@
       <!-- End of the content -->
 
       <!-- Btns -->
-      <div class="btns">
+      <div class="btns mb-3 mb-md-0">
         <select class="btn border-0 text-white ms-2 px-3 py-2">
           <option value="0" selected disabled>استيراد/تصدير</option>
           <option value="1">استيراد</option>
@@ -48,7 +50,7 @@
     <!-- End of the header -->
 
     <!-- Clients content -->
-    <div class="clients-content pt-3 ps-3 pe-5">
+    <div class="clients-content pt-3 ps-lg-3 ps-2 pe-xl-5 pe-lg-2 pe-2">
       <!-- Calling of the filter popup -->
       <PopupsFilter v-if="filter" @close="filter = false" />
 
@@ -68,8 +70,10 @@
         </button>
       </div>
 
-      <!-- Calling of the table component -->
-      <SharedTable :clients="clients" />
+      <div class="table-responsive">
+        <!-- Calling of the table component -->
+        <SharedTable :clients="clients" />
+      </div>
     </div>
     <!-- End of the clients content -->
   </div>
@@ -123,22 +127,24 @@ export default {
 
 <style lang="scss" scoped>
 .clients {
-  li {
-    button {
-      font-size: 17px;
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        width: 100%;
-        transition: background 0.2s ease-in-out;
-      }
-      &:hover,
-      &.active {
+  header {
+    li {
+      button {
+        font-size: 17px;
         &::after {
-          background-color: #01416f;
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          transition: background 0.2s ease-in-out;
+        }
+        &:hover,
+        &.active {
+          &::after {
+            background-color: #01416f;
+          }
         }
       }
     }

@@ -2,7 +2,20 @@
   <!-- Start of the request page -->
   <div class="request-page d-flex">
     <!-- Requests sidenav -->
-    <div class="requests-sidenav p-3">
+    <div class="requests-sidenav p-3" :class="show ? 'show' : ''">
+      <!-- Mobile show menu -->
+      <div class="show-menu mb-3">
+        <button
+          @click="show = !show"
+          class="show-menu-btn border-0 d-flex align-items-center justify-content-center btn bg-white p-0"
+        >
+          <i
+            class="fs-1 fa-solid"
+            :class="show ? 'fa-angle-down' : 'fa-angle-up'"
+          ></i>
+        </button>
+      </div>
+
       <!-- Header data -->
       <div class="header-data">
         <!-- Title -->
@@ -47,10 +60,7 @@
             <div class="btns bg-white px-2 ms-3">
               <!-- Increase btn -->
               <button
-                @click="
-                  request.quantity++
-                  request.price = 20 * request.quantity
-                "
+                @click="increaseQuantity(request)"
                 class="btn p-0 border-0 fw-bold ms-3"
               >
                 <i class="fa-solid fa-plus"></i>
@@ -64,10 +74,7 @@
 
               <!-- Decrease btn -->
               <button
-                @click="
-                  request.quantity--
-                  request.price = 20 * request.quantity
-                "
+                @click="decreaseQuantity(request)"
                 :disabled="request.quantity == 0"
                 class="btn p-0 border-0 fw-bold me-3"
               >
@@ -92,21 +99,21 @@
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h5 class="title mb-0 fw-bold">المجموع</h5>
 
-          <h5 class="value mb-0 fw-bold">200 ر.س</h5>
+          <h5 class="value mb-0 fw-bold">{{ summation }} ر.س</h5>
         </div>
 
         <!-- Discount -->
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h5 class="title mb-0 fw-bold">الخصم</h5>
 
-          <h5 class="value mb-0 fw-bold">0 ر.س</h5>
+          <h5 class="value mb-0 fw-bold">{{ discount }} ر.س</h5>
         </div>
 
         <!-- Taxes -->
         <div class="d-flex align-items-center justify-content-between mb-4">
           <h5 class="title mb-0 fw-bold">الضرائب</h5>
 
-          <h5 class="value mb-0 fw-bold">200 ر.س</h5>
+          <h5 class="value mb-0 fw-bold">{{ taxes }} ر.س</h5>
         </div>
       </div>
 
@@ -116,13 +123,13 @@
       >
         <span class="fs-5 fw-bold">الإجمالي</span>
 
-        <span class="total-price-value">400 ر.س</span>
+        <span class="total-price-value">{{ calcTotal }} ر.س</span>
       </button>
     </div>
     <!-- End of the requests sidenav -->
 
-    <!-- Request content -->
-    <div class="classification-content py-2 px-4">
+    <!-- Request container -->
+    <div class="classification-container py-2 px-4">
       <!-- Header -->
       <header class="position-relative mb-3 pt-3">
         <!-- Back btn -->
@@ -135,7 +142,7 @@
         </button>
 
         <!-- Title -->
-        <h4 class="title text-center mb-0">اسم التصنيف</h4>
+        <h4 class="title text-center mb-0 mt-3">اسم التصنيف</h4>
       </header>
       <!-- End of the header -->
 
@@ -147,13 +154,15 @@
       />
 
       <!-- Start of the classifications -->
-      <div class="classifications-menu d-flex flex-wrap">
+      <div
+        class="classifications-menu d-flex flex-wrap flex-column justify-content-center justify-content-md-start flex-sm-row"
+      >
         <!-- classification -->
         <div
           v-for="(classification, i) in classifications"
           @click="addClassification(classification)"
           :key="i"
-          class="request ms-4"
+          class="request ms-0 mb-3 ms-sm-4 d-flex flex-column justify-content-center justify-content-sm-start align-items-center d-sm-block"
         >
           <div
             class="classification-content bg-white mb-2 d-flex align-items-center justify-content-center p-2"
@@ -180,6 +189,7 @@ export default {
   name: 'Request',
   data() {
     return {
+      show: false,
       classifications: [
         {
           icon: 'fa-solid fa-cake-candles',
@@ -200,26 +210,50 @@ export default {
           quantity: 1,
           price: 20,
         },
-        {
-          name: 'بان كيك',
-          quantity: 1,
-          price: 20,
-        },
-        {
-          name: 'بان كيك',
-          quantity: 1,
-          price: 20,
-        },
       ],
+      summation: 0,
+      discount: 0,
+      taxes: 10,
     }
   },
+  computed: {
+    // Compute the total price for the bill
+    calcTotal() {
+      // Get all items price
+      let prices = this.addedRequests.map((item) => {
+        return +item.price
+      })
+      // Calc the summation of the prices
+      let totalPrices = prices.reduce((acc, current) => {
+        return +acc + +current
+      }, 0)
+      // Get the mathematical operation that calc total
+      let total = +totalPrices + +this.taxes - +this.discount
+      // Check if total greater than 0
+      if (total > 0) return total
+      // return taxes if total less than 0
+      else return +this.taxes
+    },
+  },
   methods: {
+    // Function that call bootstrap tooltip
+    bootstrapTooltip() {
+      // Calling of bootstrap tooltips
+      let tooltips = document.querySelectorAll('.tt')
+      if (tooltips) {
+        tooltips.forEach((t) => {
+          return new bootstrap.Tooltip(t)
+        })
+      }
+    },
     // Function that add the new classification
     addClassification(item) {
       // Get the classification that match the selected item
       let matchedItem = this.addedRequests.find(
         (request) => request.name == item.title
       )
+      // Set show data property to true
+      this.show = true
       if (matchedItem) return
       else {
         // Make a new object variable abd push it to addRequests data property
@@ -229,17 +263,38 @@ export default {
           price: 20,
         }
         this.addedRequests.push(newItem)
+        // Calling of the bootstrapTooltip function
+        setTimeout(() => {
+          this.bootstrapTooltip()
+        }, 10)
       }
+    },
+    // Function that increase the quantity of request
+    increaseQuantity(item) {
+      // Get the item from addedRequests data that match item parameter
+      let matchedItem = this.addedRequests.find(
+        (request) => request.name == item.name
+      )
+      // Increase the quantity of the matchedItem by 1
+      matchedItem.quantity++
+      // Recalculate the price of the item
+      matchedItem.price = 20 * matchedItem.quantity
+    },
+    // Function that decrease the quantity of the request
+    decreaseQuantity(item) {
+      // Get the item from addedRequests data that match item parameter
+      let matchedItem = this.addedRequests.find(
+        (request) => request.name == item.name
+      )
+      // Increase the quantity of the matchedItem by 1
+      matchedItem.quantity--
+      // Recalculate the price of the item
+      matchedItem.price = 20 * matchedItem.quantity
     },
   },
   mounted() {
-    // Calling of bootstrap tooltips
-    const tooltips = document.querySelectorAll('.tt')
-    if (tooltips) {
-      tooltips.forEach((t) => {
-        new bootstrap.Tooltip(t)
-      })
-    }
+    // Calling of the bootstrapTooltip function
+    this.bootstrapTooltip()
   },
 }
 </script>
@@ -248,8 +303,29 @@ export default {
 .request-page {
   .requests-sidenav {
     height: calc(100vh - 73px);
+    @media only screen and (max-width: 600px) {
+      position: fixed;
+      bottom: -76%;
+      width: 100%;
+      z-index: 1;
+    }
     width: 310px;
     background-color: #c9c8c8;
+    transition: bottom 0.3s ease-in-out;
+    &.show {
+      bottom: 0 !important;
+    }
+    .show-menu {
+      display: none;
+      @media only screen and (max-width: 600px) {
+        display: block;
+      }
+      .show-menu-btn {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+    }
     .header-data {
       border-bottom: 2px dashed #707070;
     }
@@ -290,8 +366,14 @@ export default {
       direction: ltr !important;
     }
   }
-  .classification-content {
+  .classification-container {
     width: calc(100% - 380px);
+    @media only screen and (max-width: 992px) {
+      width: calc(100% - 310px) !important;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 100% !important;
+    }
     header {
       .title {
         font-weight: 500;
@@ -307,10 +389,16 @@ export default {
     .classifications-menu {
       .request {
         height: fit-content;
+        @media only screen and (max-width: 767px) {
+          width: 100% !important;
+        }
         cursor: pointer;
         .classification-title,
         .classification-content {
           width: 110px;
+          @media only screen and (max-width: 767px) {
+            width: 95% !important;
+          }
         }
         .classification-content {
           height: 90px;
